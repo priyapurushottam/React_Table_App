@@ -9,7 +9,7 @@ const TableComponent = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/data');
-        const formattedData = response.data.map(row => ({
+        const formattedData = response.data.map(row => {
             ...row,
             created_date: new Date(row.created_at).toLocaleDateString(),
             created_time: new Date(row.created_at).toLocaleTimeString()
@@ -25,7 +25,7 @@ const TableComponent = () => {
 
   const filteredData = data.filter(row => {
     // Perform case-insensitive search on name and location
-    return (row.name && row.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+    return (row.custmer_name && row.custmer_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (row.location && row.location.toLowerCase().includes(searchQuery.toLowerCase()));
   });
 
@@ -54,7 +54,7 @@ const TableComponent = () => {
           {filteredData.map((row, index) => (
             <tr key={index}>
               <td>{row.sno}</td>
-              <td>{row.name}</td>
+              <td>{row.custmer_name}</td>
               <td>{row.location}</td>
               <td>{row.age}</td>
               <td>{row.phone}</td>
